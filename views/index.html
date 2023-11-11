@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercise Tracker | freeCodeCamp</title>
+    <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico"  type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Exercise tracker</h1>
+      <p> you can use the UI below for two the endpoints.</p>
+      <p> the remaining endpoints can be referenced below.</p>
+      <form action="/api/users" method="post">
+        <h3>Create a New User</h3>
+        <p><code>POST /api/users</code></p>
+        <input id="uname" type="text" name="username" placeholder="username" />
+        <input type="submit" value="Submit" />
+      </form>
+      <form id="exercise-form" method="post">
+        <h3>Add exercises</h3>
+        <p><code>POST /api/users/:_id/exercises</code></p>
+        <input id="uid" type="text" name=":_id" placeholder=":_id" />
+        <input id="desc" type="text" name="description" placeholder="description*" />
+        <input id="dur" type="text" name="duration" placeholder="duration* (mins.)" />
+        <input id="date" type="text" name="date" placeholder="date (yyyy-mm-dd)" />
+        <input type="submit" value="Submit" />
+      </form>
+      <p>
+        <strong>Endpoints</strong>
+        <ul>
+          <li><strong>GET /api/users/:_id/logs</strong></li>
+          <span> used to get a full exercise log of a user using their 'id' </span>
+          <span> pass in the id to the URI where it specifies ':_id'</span>
+          <span> you can add the following query parameters to the end of the endpoint: </span>
+          <strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number
+          <li><strong>GET /api/users/:_id/exercises</strong></li>
+          <span> used to get all exercises associated with a user using their 'id'</span>
+          <span> pass in the id to the URI where it specifies ':_id'</span>
+          <li><strong>GET /api/users</strong> </li>
+          <span> used to get an array of all users created in the database</span>
+          <li><strong>POST /api/users</strong> </li>
+          <span> used to create a user</span>
+          <span> pass data using raw body payload | content-type application/json </span>
+          <li><strong>POST /api/users/:_id/exercises </strong></li>
+          <span> used to add an exercise to the specified user using their 'id'</span>
+          <span> pass data using raw body payload | content-type application/json  </span>
+        </ul>
+
+      </p>
+    </div>
+    <script>
+      const exerciseForm = document.getElementById("exercise-form");
+
+      exerciseForm.addEventListener("submit", () => {
+        const userId = document.getElementById("uid").value;
+        exerciseForm.action = `/api/users/${userId}/exercises`;
+
+        exerciseForm.submit();
+      });
+    </script>
+  </body>
+</html>
